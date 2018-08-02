@@ -5,19 +5,19 @@ import Loader from '../../Loader';
 
 const CardWrapper = (props) => {
   const { dictionaries, fetching, org } = props;
-  if (dictionaries.length >= 1) {
+  if (fetching && !org) {
+    return (
+      <div className="text-center mt-3">
+        <Loader />
+      </div>
+    );
+  }
+  if (dictionaries.length >= 1 && !org) {
     return (
       <div className="row justify-content-center">
         {dictionaries.map(dictionary => (
           <DictionaryCard dictionary={dictionary} key={dictionary.uuid} {...props} />
         ))}
-      </div>
-    );
-  }
-  if (fetching && !org) {
-    return (
-      <div className="text-center mt-3">
-        <Loader />
       </div>
     );
   }
